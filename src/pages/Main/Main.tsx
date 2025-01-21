@@ -6,6 +6,7 @@ import {VehicleService} from "../../services/vehicle-service.ts";
 import {useDebounce} from "../../hooks/useDebounce.tsx";
 import vehicleStore from '../../stores/vehlicle-store.tsx';
 import { observer } from "mobx-react-lite";
+import Pagination from '@mui/material/Pagination';
 
 type Function = (value: unknown) => void;
 
@@ -17,8 +18,8 @@ export default observer(
         const searchNationDebounce = useDebounce(getVehicleByNation, 800);
         const searchLevelDebounce = useDebounce(getVehicleByLevel, 800);
         
-        const {displayedPageVehicles, updateVehicle, showVehiclesByLevel,
-            showVehiclesByNation, showVehiclesByClass, showVehiclesByName,} = vehicleStore;
+        const {displayedPageVehicles, updateVehicle, showVehiclesByLevel, goToPage,
+            showVehiclesByNation, showVehiclesByClass, showVehiclesByName, pageCount} = vehicleStore;
         // const entry = 'I-56';
         // Подводная лодка
         const vehicleService: VehicleService = new VehicleService();
@@ -28,6 +29,7 @@ export default observer(
         const levelVehicles: number | undefined = undefined;
         useEffect(() => {
             getAllVehicles();
+
         },[])
 
         function getAllVehicles() {
@@ -39,7 +41,6 @@ export default observer(
         }
 
         function getVehicleByName(value: string) {
-            console.log('nameVehicles', value)
             showVehiclesByName(value)
         }
 
@@ -56,30 +57,37 @@ export default observer(
         }
 
         function updateSearchNameVehicle(e: {target: {value: unknown}}, method: Function) {
-            console.log('updateSearchNameVehicle', e);
-            console.log('typeof', typeof method);
             method(e.target?.value)
+        }
+
+        function changePage(event: React.ChangeEvent<unknown>, page: number) {
+            console.log('event', event)
+            goToPage(page);
         }
 
         return (
             <div className={style.main}>
                 <h1>Все корабли игры «Мир Кораблей»</h1>
-                <div>
-                    <span>Название корабля</span>
-                    <input name={nameVehicles} onChange={(e) => updateSearchNameVehicle(e, searchNamedDebounce)}/>
+                <div className={style.fields}>
+                    <div>
+                        <span>Название корабля</span>
+                        <input name={nameVehicles} onChange={(e) => updateSearchNameVehicle(e, searchNamedDebounce)}/>
+                    </div>
+                    <div>
+                        <span>Класс корабля</span>
+                        <input value={classVehicles} onChange={(e) => updateSearchNameVehicle(e, searchClassDebounce)}/>
+                    </div>
+                    <div>
+                        <span>Нация корабля</span>
+                        <input value={nationVehicles}
+                               onChange={(e) => updateSearchNameVehicle(e, searchNationDebounce)}/>
+                    </div>
+                    <div>
+                        <span>Уровень корабля</span>
+                        <input value={levelVehicles} onChange={(e) => updateSearchNameVehicle(e, searchLevelDebounce)}/>
+                    </div>
                 </div>
-                <div>
-                    <span>Класс корабля</span>
-                    <input value={classVehicles} onChange={(e) => updateSearchNameVehicle(e, searchClassDebounce)}/>
-                </div>
-                <div>
-                    <span>Нация корабля</span>
-                    <input value={nationVehicles} onChange={(e) => updateSearchNameVehicle(e, searchNationDebounce)}/>
-                </div>
-                <div>
-                    <span>Уровень корабля</span>
-                    <input value={levelVehicles} onChange={(e) => updateSearchNameVehicle(e, searchLevelDebounce)}/>
-                </div>
+
 
                 <div className={style.cards}>
                     {displayedPageVehicles && displayedPageVehicles.map((vehicle: IVehicleModel, index) =>
@@ -91,7 +99,10 @@ export default observer(
                                       type={vehicle.type} key={index}></VehiclesCard>
                     )}
                 </div>
-
+                {pageCount && <Pagination count={pageCount}
+                                          onChange={(event: React.ChangeEvent<unknown>, page: number) => changePage(event, page)}
+                                          className={style.pagination}
+                                          defaultPage={1}></Pagination>}
             </div>
 
         )

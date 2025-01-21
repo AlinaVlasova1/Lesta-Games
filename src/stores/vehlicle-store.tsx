@@ -13,6 +13,7 @@ class VehicleStore {
         makeObservable(this, {
             vehicles: observable,
             displayedPageVehicles: observable,
+            pageCount: observable,
             updateVehicle: action,
             goToPage: action,
             showVehiclesByLevel: action,
@@ -26,35 +27,35 @@ class VehicleStore {
         this.vehicles = vehicles;
         this.copyVehicles = vehicles;
         this.displayedPageVehicles = vehicles.splice(0, (this.displayedVehiclesCount - 1));
-        this.pageCount = vehicles.length/this.displayedVehiclesCount;
+        this.pageCount = Math.ceil(vehicles.length/this.displayedVehiclesCount);
     }
 
-    goToPage(page: number) {
-        this.displayedPageVehicles = this.vehicles.splice(page, (page + this.displayedVehiclesCount));
+    goToPage = (page: number)=> {
+        this.displayedPageVehicles = this.vehicles.slice(page, (page + this.displayedVehiclesCount));
     }
 
     showVehiclesByLevel = (level: number) => {
         const newArr= this.vehicles.filter((vehicle) => vehicle.level === level);
         this.displayedPageVehicles = newArr.splice(0, (this.displayedVehiclesCount - 1));
-        this.pageCount = this.vehicles.length/this.displayedVehiclesCount;
+        this.pageCount =  Math.ceil(newArr.length/this.displayedVehiclesCount);
     }
 
     showVehiclesByNation = (nation: string) => {
         const newArr = this.vehicles.filter(vehicle => vehicle.nation.title.toLowerCase().includes(nation.toLowerCase()));
         this.displayedPageVehicles = newArr.splice(0, (this.displayedVehiclesCount - 1));
-        this.pageCount = this.vehicles.length/this.displayedVehiclesCount;
+        this.pageCount =  Math.ceil(newArr.length/this.displayedVehiclesCount);
     }
 
     showVehiclesByClass = (type: string) => {
         const newArr = this.vehicles.filter(vehicle => vehicle.type.title.toLowerCase().includes(type.toLowerCase()));
         this.displayedPageVehicles = newArr.splice(0, (this.displayedVehiclesCount - 1));
-        this.pageCount = newArr.length/this.displayedVehiclesCount;
+        this.pageCount = Math.ceil(newArr.length/this.displayedVehiclesCount);
     }
 
     showVehiclesByName = (name: string) => {
         const newArr = this.vehicles.filter(vehicle => vehicle.title.toLowerCase().includes(name.toLowerCase()));
         this.displayedPageVehicles = newArr.splice(0, (this.displayedVehiclesCount - 1));
-        this.pageCount = newArr.length/this.displayedVehiclesCount;
+        this.pageCount = Math.ceil(newArr.length/this.displayedVehiclesCount);
     }
 }
 
