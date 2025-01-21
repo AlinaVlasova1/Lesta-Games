@@ -1,5 +1,5 @@
 export class UiResource{
-    static readonly Main: string = "/";
+    static readonly Main: string = "/main";
 
 
     static getRedirectUri(): string | null {
