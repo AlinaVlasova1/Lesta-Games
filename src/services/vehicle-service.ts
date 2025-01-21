@@ -34,7 +34,7 @@ export class VehicleService {
                                                         `;
 
 
-    getAllVehicles(): Promise<any> {
+    getAllVehicles(): Promise<Response> {
         return fetch(this.url, {
             method: 'POST',
             headers: {
@@ -43,25 +43,6 @@ export class VehicleService {
             },
             body: JSON.stringify({
                 query: this.query,
-                variables: {
-                    title: 'Tachibana',
-                },
-            }),
-        });
-    }
-
-    getVehicleByName(name: string): Promise<any> {
-        return fetch(this.url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            },
-            body: JSON.stringify({
-                query: this.query,
-                variables: {
-                    title: name,
-                },
             }),
         });
     }

@@ -9,7 +9,7 @@ export const VehiclesCard: React.FunctionComponent<IVehicleModel> = (item) => {
             <span>Класс корабля: {item.type.title}</span>
             <span>Класс корабля: {item.type.title}</span>
             <span>Нация корабля: {item.nation.title}</span>
-            <span>Нровень корабля: {item.level}</span>
+            <span>Уровень корабля: {item.level}</span>
             <span>Описание корабля: {item.description}</span>
         </div>
     )
