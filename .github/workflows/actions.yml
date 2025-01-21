@@ -4,6 +4,12 @@ on: [push]
 
 jobs:
   build:
+
+#    steps:
+#      - uses: actions/checkout@v3
+#
+#      - name: Build and Deploy React app to GitHub Pages
+#        uses: omkartapale/react-deployment-gh-pages@v1.0.0
     name: Build  # Defines the name of the build job.
     runs-on: ubuntu-latest  # Specifies the operating system for the job.
 
