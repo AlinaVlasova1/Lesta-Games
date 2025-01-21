@@ -1,7 +1,7 @@
 {
   "name": "lesta-games",
   "private": true,
-  "homepage": "https://AlinaVlasova1.github.io/Lesta-Games",
+  "homepage": "https://AlinaVlasova1.github.io/lesta-games",
   "version": "0.0.0",
   "predeploy": "npm run build",
   "deploy": "gh-pages -d build",
