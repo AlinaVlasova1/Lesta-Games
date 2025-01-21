@@ -1,6 +1,7 @@
 {
   "name": "lesta-games",
   "private": true,
+  "homepage": "https://AlinaVlasova1.github.io/Lesta-Games",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
