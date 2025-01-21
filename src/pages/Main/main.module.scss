@@ -1,0 +1,42 @@
+.main {
+  width: 100%;
+
+  h1 {
+    text-align: center;
+  }
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 90%;
+  gap: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pagination {
+
+  margin-top: 40px;
+  margin-bottom: 50px;
+
+  ul {
+    justify-content: center;
+  }
+
+  button {
+    color: white;
+  }
+}
+
+.fields {
+  display: flex;
+  justify-content: center;
+
+  span {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+
+}

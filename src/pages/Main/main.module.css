@@ -1,0 +1,18 @@
+.main {
+    width: 100%;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 90%;
+    gap: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pagination {
+    button {
+        color: white;
+    }
+}
