@@ -49,7 +49,6 @@ export class VehicleService {
             if (response.status === 200) {
                 return response.json();
             } else {
-                console.log(response);
                 return Promise.reject(response);
             }
 
