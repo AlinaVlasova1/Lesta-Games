@@ -1,7 +1,7 @@
-import {IVehicleModel} from "./IVehicleModel.ts";
+import {IVehicle} from "./vehicle-model.ts";
 
-export interface IVehicleResponseModel {
+export interface IVehicleResponse {
     data: {
-        vehicles: Array<IVehicleModel>
+        vehicles: Array<IVehicle>
     }
 }
