@@ -1,5 +1,4 @@
 import {ApiUrlFactory} from "./api-url-factory.ts";
-import unregister from "../interceptor.ts";
 import {IVehicleResponse} from "../models/vehicle-response-model.ts";
 
 export class VehicleService {
@@ -57,4 +56,3 @@ export class VehicleService {
         })
     }
 }
-unregister();
