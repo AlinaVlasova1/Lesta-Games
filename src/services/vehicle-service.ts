@@ -1,4 +1,6 @@
 import {ApiUrlFactory} from "./api-url-factory.ts";
+import unregister from "../interceptor.ts";
+import {IVehicleResponse} from "../models/vehicle-response-model.ts";
 
 export class VehicleService {
 
@@ -34,7 +36,7 @@ export class VehicleService {
                                                         `;
 
 
-    getAllVehicles(): Promise<Response> {
+    getAllVehicles(): Promise<IVehicleResponse> {
         return fetch(this.url, {
             method: 'POST',
             headers: {
@@ -43,10 +45,16 @@ export class VehicleService {
             },
             body: JSON.stringify({
                 query: this.query,
-            }),
-        });
+            })
+        }).then(response => {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                console.log(response);
+                return Promise.reject(response);
+            }
+
+        })
     }
-
-
-
 }
+unregister();

@@ -1,4 +1,4 @@
-export interface IVehicleModel {
+export interface IVehicle {
     title: string,
     level: number,
     nation: {
